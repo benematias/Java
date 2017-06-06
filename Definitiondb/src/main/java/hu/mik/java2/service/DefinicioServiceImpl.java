@@ -12,36 +12,36 @@ import hu.mik.java2.definition.dao.SimpleDefinicioDao;
 public class DefinicioServiceImpl implements DefinicioService {
 
 	@Autowired
-	private SimpleDefinicioDao definitioDao;
+	private SimpleDefinicioDao definitionDao;
 	
 	@Override
 	public List<Definicio> listDefinicios() {
-		return this.definitioDao.findAll();
+		return this.definitionDao.findAll();
 	}
 
 	@Override
 	public Definicio getDefinicioById(Integer id) {
-		return this.definitioDao.findOne(id);
+		return this.definitionDao.findOne(id);
 	}
 
 	@Override
 	public Definicio saveDefinicio(Definicio book) {
-		return this.definitioDao.save(book);
+		return this.definitionDao.save(book);
 	}
 
 	@Override
 	public Definicio updateDefinicio(Definicio book) {
-		return this.definitioDao.save(book);
+		return this.definitionDao.save(book);
 	}
 
 	@Override
 	public void deleteDefinicio(Definicio book) {
-		this.definitioDao.delete(book);
+		this.definitionDao.delete(book);
 	}
 
 	@Override
 	public List<Definicio> listDefiniciosByAuthor(String definition) {
-		return this.definitioDao.findByDefinitionLike(definition);
+		return this.definitionDao.findByDefinitionLike(definition);
 	}
 
 }

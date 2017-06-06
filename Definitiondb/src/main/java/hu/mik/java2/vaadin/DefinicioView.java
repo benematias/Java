@@ -48,8 +48,8 @@ public class DefinicioView extends VerticalLayout implements View {
 	private ApplicationContext ctx;
 
 	@Autowired
-	@Qualifier("definicioServiceImpl")
-	private DefinicioService definicioService;
+	@Qualifier("definitionServiceImpl")
+	private DefinicioService definicionService;
 
 	Table definicioTable = new Table("List of definitions");
 
@@ -98,7 +98,7 @@ public class DefinicioView extends VerticalLayout implements View {
 					refreshTable();
 				} else {
 					definicioBean.removeAllItems();
-					definicioBean.addAll(definicioService.listDefiniciosByAuthor(searchfield.getValue()));
+					definicioBean.addAll(definicionService.listDefiniciosByAuthor(searchfield.getValue()));
 				}
 			}
 		});
@@ -113,7 +113,7 @@ public class DefinicioView extends VerticalLayout implements View {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Definicio definicio = new Definicio();
-				ctx.getBean(DefinicioWindow.class).showWindow(definicio, "add a new definition", false, DefinicioView.this);
+				ctx.getBean(DefinicionWindow.class).showWindow(definicio, "add a new definition", false, DefinicioView.this);
 			}
 		});
 		
@@ -134,7 +134,7 @@ public class DefinicioView extends VerticalLayout implements View {
 						definicioFieldGroup.setItemDataSource(definicioItem);
 						definicioFieldGroup.commit();
 						Definicio bean = definicioFieldGroup.getItemDataSource().getBean();
-						definicioService.deleteDefinicio(bean);
+						definicionService.deleteDefinicio(bean);
 					}
 					refreshTable();
 					selectedItemIds.removeAll(selectedItemIds);
@@ -177,13 +177,13 @@ public class DefinicioView extends VerticalLayout implements View {
 
 	protected void refreshTable() {
 		definicioBean.removeAllItems();
-		definicioBean.addAll(definicioService.listDefinicios());
+		definicioBean.addAll(definicionService.listDefinicios());
 	}
 
 	private Component createTable() {
 		definicioBean = new BeanContainer<Long, Definicio>(Definicio.class);
 		definicioBean.setBeanIdProperty("id");
-		definicioBean.addAll(definicioService.listDefinicios());
+		definicioBean.addAll(definicionService.listDefinicios());
 		definicioTable.setContainerDataSource(definicioBean);
 		definicioTable.setSizeFull();
 
@@ -218,7 +218,7 @@ public class DefinicioView extends VerticalLayout implements View {
 					@Override
 					public void buttonClick(ClickEvent event) {
 						BeanItem<Definicio> definicioItem = (BeanItem<Definicio>) source.getItem(itemId);
-						ctx.getBean(DefinicioWindow.class).showWindow(definicioItem.getBean(), "Show", true,
+						ctx.getBean(DefinicionWindow.class).showWindow(definicioItem.getBean(), "Show", true,
 								DefinicioView.this);
 					}
 				});
@@ -238,7 +238,7 @@ public class DefinicioView extends VerticalLayout implements View {
 					@Override
 					public void buttonClick(ClickEvent event) {
 						BeanItem<Definicio> definicioItem = (BeanItem<Definicio>) source.getItem(itemId);
-						ctx.getBean(DefinicioWindow.class).showWindow(definicioItem.getBean(), "Edit", false,
+						ctx.getBean(DefinicionWindow.class).showWindow(definicioItem.getBean(), "Edit", false,
 								DefinicioView.this);
 					}
 				});

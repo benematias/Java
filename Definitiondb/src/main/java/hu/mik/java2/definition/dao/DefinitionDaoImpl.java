@@ -26,7 +26,7 @@ public class DefinitionDaoImpl implements DefinitionDao {
 	@Override
 	public List<Definicio> findAll() {
 		return this.entityManager
-				.createQuery("SELECT b FROM Definition b ORDER BY b.id DESC ", Definicio.class)
+				.createQuery("SELECT b FROM Definicio b ORDER BY b.id DESC ", Definicio.class)
 				.getResultList();
 	}
 
@@ -51,10 +51,10 @@ public class DefinitionDaoImpl implements DefinitionDao {
 	}
 
 	@Override
-	public List<Definicio> findByDefinitionLike(String definition) {
+	public List<Definicio> findByDefinitionLike(String definitio) {
 		return this.entityManager
-			.createQuery("SELECT b FROM Definition b WHERE b.definicio LIKE :definicio", Definicio.class)
-			.setParameter("definicio", definition)
+			.createQuery("SELECT b FROM Definicio b WHERE b.definicio LIKE :definicio", Definicio.class)
+			.setParameter("definicio", definitio)
 			.getResultList();
 	}
 }

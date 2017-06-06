@@ -24,11 +24,11 @@ import hu.mik.java2.service.DefinicioService;
 @SuppressWarnings("serial")
 @org.springframework.stereotype.Component
 @Scope(scopeName = "prototype")
-public class DefinicioWindow extends Window{
+public class DefinicionWindow extends Window{
 	
 	@Autowired
-	@Qualifier("definicioServiceImpl")
-	private DefinicioService definicioService;
+	@Qualifier("definitionServiceImpl")
+	private DefinicioService definicionService;
 
 
 	public void showWindow(Definicio definicio, String title, boolean isReadonly, DefinicioView definicioView) {
@@ -65,11 +65,11 @@ public class DefinicioWindow extends Window{
 					definicioBeanField.commit();
 					Definicio bean = definicioBeanField.getItemDataSource().getBean();
 					if (bean.getId() == null) {
-						definicioService.saveDefinicio(bean);
+						definicionService.saveDefinicio(bean);
 					} else {
-						definicioService.updateDefinicio(bean);
+						definicionService.updateDefinicio(bean);
 					}
-					DefinicioWindow.this.close();
+					DefinicionWindow.this.close();
 					Notification.show("Success");
 					definicioView.refreshTable();
 				} catch (Exception e) {

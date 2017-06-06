@@ -14,11 +14,11 @@ public class Definicio {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "s_book", allocationSize = 1, initialValue = 50)
+	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "s_definition", allocationSize = 1, initialValue = 50)
 	private Integer id;
 	@Column(name = "subject")
 	private String subject;
-	@Column(name = "definition")
+	@Column(name = "definicio")
 	private String definition;
 	@Column(name = "description")
 	private String description;
