@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hu.mik.java2.definition.bean.Definicio;
+import hu.mik.java2.definition.dao.DefinitionDao;
+import hu.mik.java2.definition.dao.DefinitionDaoImpl;
 import hu.mik.java2.definition.dao.SimpleDefinicioDao;
 
 @Service("definitionServiceImpl")
 public class DefinicioServiceImpl implements DefinicioService {
 
 	@Autowired
-	private SimpleDefinicioDao definitionDao;
+	private DefinitionDao definitionDao;
 	
 	@Override
 	public List<Definicio> listDefinicios() {
@@ -25,22 +27,22 @@ public class DefinicioServiceImpl implements DefinicioService {
 	}
 
 	@Override
-	public Definicio saveDefinicio(Definicio book) {
-		return this.definitionDao.save(book);
+	public Definicio saveDefinicio(Definicio definition) {
+		return this.definitionDao.save(definition);
 	}
 
 	@Override
-	public Definicio updateDefinicio(Definicio book) {
-		return this.definitionDao.save(book);
+	public Definicio updateDefinicio(Definicio definition) {
+		return this.definitionDao.save(definition);
 	}
 
 	@Override
-	public void deleteDefinicio(Definicio book) {
-		this.definitionDao.delete(book);
+	public void deleteDefinicio(Definicio definition) {
+		this.definitionDao.delete(definition);
 	}
 
 	@Override
-	public List<Definicio> listDefiniciosByAuthor(String definition) {
+	public List<Definicio> listDefiniciosByDefinition(String definition) {
 		return this.definitionDao.findByDefinitionLike(definition);
 	}
 

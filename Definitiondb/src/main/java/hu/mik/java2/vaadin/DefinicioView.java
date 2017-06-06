@@ -98,7 +98,7 @@ public class DefinicioView extends VerticalLayout implements View {
 					refreshTable();
 				} else {
 					definicioBean.removeAllItems();
-					definicioBean.addAll(definicionService.listDefiniciosByAuthor(searchfield.getValue()));
+					definicioBean.addAll(definicionService.listDefiniciosByDefinition(searchfield.getValue()));
 				}
 			}
 		});

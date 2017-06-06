@@ -1,5 +1,6 @@
 package hu.mik.java2.definition.dao;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -53,8 +54,8 @@ public class DefinitionDaoImpl implements DefinitionDao {
 	@Override
 	public List<Definicio> findByDefinitionLike(String definitio) {
 		return this.entityManager
-			.createQuery("SELECT b FROM Definicio b WHERE b.definicio LIKE :definicio", Definicio.class)
-			.setParameter("definicio", definitio)
+			.createQuery("SELECT b FROM Definicio b WHERE b.definition LIKE :definicion", Definicio.class)
+			.setParameter("definicion", "%"+definitio+"%")
 			.getResultList();
 	}
 }

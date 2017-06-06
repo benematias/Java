@@ -11,11 +11,11 @@ public interface DefinicioService {
 	
 	public Definicio getDefinicioById(Integer id);
 	
-	public Definicio saveDefinicio(Definicio book);
+	public Definicio saveDefinicio(Definicio definition);
 	
-	public Definicio updateDefinicio(Definicio book);
+	public Definicio updateDefinicio(Definicio definition);
 	
-	public void deleteDefinicio(Definicio book);
+	public void deleteDefinicio(Definicio definition);
 	
-	public List<Definicio> listDefiniciosByAuthor(String author);
+	public List<Definicio> listDefiniciosByDefinition(String definition);
 }
