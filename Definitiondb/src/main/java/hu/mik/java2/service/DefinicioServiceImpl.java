@@ -45,5 +45,11 @@ public class DefinicioServiceImpl implements DefinicioService {
 	public List<Definicio> listDefiniciosByDefinition(String definition) {
 		return this.definitionDao.findByDefinitionLike(definition);
 	}
+	
+	@Override
+	public List<Definicio> listDefiniciosBySbject(String subject) {
+		return this.definitionDao.listDefiniciosBySbject(subject);
+
+	}
 
 }

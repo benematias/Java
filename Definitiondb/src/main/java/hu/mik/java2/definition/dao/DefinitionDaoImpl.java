@@ -58,4 +58,12 @@ public class DefinitionDaoImpl implements DefinitionDao {
 			.setParameter("definicion", "%"+definitio+"%")
 			.getResultList();
 	}
+
+	@Override
+	public List<Definicio> listDefiniciosBySbject(String subject) {
+		return this.entityManager
+				.createQuery("SELECT b FROM Definicio b WHERE b.subject LIKE :subject", Definicio.class)
+				.setParameter("subject", subject)
+				.getResultList();
+	}
 }

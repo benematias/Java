@@ -70,18 +70,27 @@ public class DefinicioView extends VerticalLayout implements View {
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
 		horizontalLayout.setMargin(true);
+		
 		Component searchDefinicioComponent = createSearchField();
 		horizontalLayout.addComponent(searchDefinicioComponent);
 		horizontalLayout.setComponentAlignment(searchDefinicioComponent, Alignment.BOTTOM_CENTER);
+		
+		Component subjectsearchDefinicioComponent = createSearchbysubjectField();
+		horizontalLayout.addComponent(subjectsearchDefinicioComponent);
+		horizontalLayout.setComponentAlignment(subjectsearchDefinicioComponent, Alignment.BOTTOM_CENTER);
+		
 		Component newDefinicioComponent = createNewDefinicioButton();
 		horizontalLayout.addComponent(newDefinicioComponent);
 		horizontalLayout.setComponentAlignment(newDefinicioComponent, Alignment.BOTTOM_CENTER);
+		
 		Component deleteDefinicioComponent = deleteDefinicioButton();
 		horizontalLayout.addComponent(deleteDefinicioComponent);
 		horizontalLayout.setComponentAlignment(deleteDefinicioComponent, Alignment.BOTTOM_CENTER);
+		
 		Component backToMainComponent = backToMainViewButton();
 		horizontalLayout.addComponent(backToMainComponent);
 		horizontalLayout.setComponentAlignment(backToMainComponent, Alignment.BOTTOM_CENTER);
+		
 		Component logOutComponent = logOutButton();
 		horizontalLayout.addComponent(logOutComponent);
 		horizontalLayout.setComponentAlignment(logOutComponent, Alignment.BOTTOM_CENTER);
@@ -104,7 +113,22 @@ public class DefinicioView extends VerticalLayout implements View {
 		});
 		return searchfield;
 	}
-	
+	private Component createSearchbysubjectField() {
+		final TextField subjectsearchfield = new TextField("seahrch for List of subject");
+		subjectsearchfield.addValueChangeListener(new ValueChangeListener() {
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				if (subjectsearchfield.getValue().isEmpty()) {
+					refreshTable();
+				} else {
+					definicioBean.removeAllItems();
+					definicioBean.addAll(definicionService.listDefiniciosBySbject(subjectsearchfield.getValue()));
+				}
+			}
+		});
+		return subjectsearchfield;
+	}
 	private Component createNewDefinicioButton() {
 		Button newDefinicioButton = new Button("add a new definition");
 		

@@ -15,4 +15,7 @@ public interface DefinitionDao {
 	public void delete(Definicio definicio);
 	
 	public List<Definicio> findByDefinitionLike(String definition);
+	
+	public List<Definicio> listDefiniciosBySbject(String subject);
+	
 }

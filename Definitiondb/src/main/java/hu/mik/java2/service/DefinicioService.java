@@ -18,4 +18,6 @@ public interface DefinicioService {
 	public void deleteDefinicio(Definicio definition);
 	
 	public List<Definicio> listDefiniciosByDefinition(String definition);
+	
+	public List<Definicio> listDefiniciosBySbject(String subject);
 }

@@ -24,7 +24,7 @@ public class MainView extends VerticalLayout implements View {
 		Page.getCurrent().setTitle("Main page");
 		this.setMargin(true);
 		this.setSpacing(true);
-		Label htmlLabel = new Label("<h1>Welocome!</h1>");
+		Label htmlLabel = new Label("<h1>Wellcome!</h1>");
 		htmlLabel.setContentMode(ContentMode.HTML);
 		htmlLabel.setSizeUndefined();
 		this.addComponent(htmlLabel);
