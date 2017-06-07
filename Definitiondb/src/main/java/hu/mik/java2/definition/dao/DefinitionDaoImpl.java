@@ -1,6 +1,7 @@
 package hu.mik.java2.definition.dao;
 
 import java.io.Console;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,6 +35,8 @@ public class DefinitionDaoImpl implements DefinitionDao {
 	@Override
 	public Definicio save(Definicio definition) {
 		if(definition.getId() == null) {
+			Date time= new Date();
+			definition.setRegistrydate(time);
 			this.entityManager.persist(definition);
 			
 			return definition;

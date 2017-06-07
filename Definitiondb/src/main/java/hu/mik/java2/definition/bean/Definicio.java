@@ -1,5 +1,7 @@
 package hu.mik.java2.definition.bean;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class Definicio {
 	@Column(name = "description")
 	private String description;
 	@Column(name = "registrydate")
-	private Integer registrydate;
+	private Date registrydate;
 
 	public Integer getId() {
 		return id;
@@ -57,11 +59,11 @@ public class Definicio {
 		this.description = description;
 	}
 
-	public Integer getRegistrydate() {
+	public Date getRegistrydate() {
 		return registrydate;
 	}
 
-	public void setRegistrydate(Integer registrydate) {
+	public void setRegistrydate(Date registrydate) {
 		this.registrydate = registrydate;
 	}
 

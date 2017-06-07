@@ -63,6 +63,7 @@ public class DefinicionWindow extends Window{
 			public void buttonClick(ClickEvent event) {
 				try {
 					definicioBeanField.commit();
+					
 					Definicio bean = definicioBeanField.getItemDataSource().getBean();
 					if (bean.getId() == null) {
 						definicionService.saveDefinicio(bean);
@@ -93,10 +94,11 @@ public class DefinicionWindow extends Window{
 		authorField.setNullRepresentation("");
 		authorField.setReadOnly(isReadonly);
 		formLayout.addComponent(authorField);
+		if(isReadonly){
 		TextField pubYearField = definicioBeanField.buildAndBind("registrydate", "registrydate", TextField.class);
 		pubYearField.setNullRepresentation("");
 		pubYearField.setReadOnly(isReadonly);
-		formLayout.addComponent(pubYearField);
+		formLayout.addComponent(pubYearField);}
 		RichTextArea descriptionField = definicioBeanField.buildAndBind("description", "description", RichTextArea.class);
 		descriptionField.setNullRepresentation("");
 		descriptionField.setReadOnly(isReadonly);
