@@ -1,5 +1,8 @@
 package hu.mik.java2.vaadin;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
@@ -18,7 +21,8 @@ import com.vaadin.ui.Button.ClickListener;
 public class MainView extends VerticalLayout implements View {
 
 	protected static final String MAIN_VIEW_NAME = "";
-
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	 String role = auth.getAuthorities().toString(); 
 	@Override
 	public void enter(ViewChangeEvent event) {
 		Page.getCurrent().setTitle("Main page");
@@ -31,6 +35,16 @@ public class MainView extends VerticalLayout implements View {
 		this.setComponentAlignment(htmlLabel, Alignment.TOP_CENTER);
 
 		Button navToDefinicioListButoon = new Button("Definicions");
+	
+
+		if(role.contains("ROLE_ADMIN")){
+			navToDefinicioListButoon.addClickListener(new ClickListener() {
+
+				@Override
+				public void buttonClick(ClickEvent event) {
+					getUI().getNavigator().navigateTo(DefinicioViewadmin.DEFINICION_VIEW_NAME);
+				}});
+			}else{
 
 		navToDefinicioListButoon.addClickListener(new ClickListener() {
 
@@ -39,10 +53,10 @@ public class MainView extends VerticalLayout implements View {
 				getUI().getNavigator().navigateTo(DefinicioView.DEFINICION_VIEW_NAME);
 			}
 		});
-
+			}
 		this.addComponent(navToDefinicioListButoon);
 		this.setComponentAlignment(navToDefinicioListButoon, Alignment.BOTTOM_CENTER);
-
+			
 		Button logOutButoon = new Button("Logout");
 
 		logOutButoon.addClickListener(new ClickListener() {

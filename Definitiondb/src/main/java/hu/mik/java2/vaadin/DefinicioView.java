@@ -66,7 +66,7 @@ public class DefinicioView extends VerticalLayout implements View {
 	}
 
 
-	private Component createFunctionLayout() {
+	protected Component createFunctionLayout() {
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
 		horizontalLayout.setMargin(true);
@@ -83,10 +83,6 @@ public class DefinicioView extends VerticalLayout implements View {
 		horizontalLayout.addComponent(newDefinicioComponent);
 		horizontalLayout.setComponentAlignment(newDefinicioComponent, Alignment.BOTTOM_CENTER);
 		
-		Component deleteDefinicioComponent = deleteDefinicioButton();
-		horizontalLayout.addComponent(deleteDefinicioComponent);
-		horizontalLayout.setComponentAlignment(deleteDefinicioComponent, Alignment.BOTTOM_CENTER);
-		
 		Component backToMainComponent = backToMainViewButton();
 		horizontalLayout.addComponent(backToMainComponent);
 		horizontalLayout.setComponentAlignment(backToMainComponent, Alignment.BOTTOM_CENTER);
@@ -97,7 +93,7 @@ public class DefinicioView extends VerticalLayout implements View {
 		return horizontalLayout;
 	}
 
-	private Component createSearchField() {
+	protected Component createSearchField() {
 		final TextField searchfield = new TextField("seahrch for List of definition");
 		searchfield.addValueChangeListener(new ValueChangeListener() {
 
@@ -113,7 +109,7 @@ public class DefinicioView extends VerticalLayout implements View {
 		});
 		return searchfield;
 	}
-	private Component createSearchbysubjectField() {
+	protected Component createSearchbysubjectField() {
 		final TextField subjectsearchfield = new TextField("seahrch for List of subject");
 		subjectsearchfield.addValueChangeListener(new ValueChangeListener() {
 
@@ -129,7 +125,7 @@ public class DefinicioView extends VerticalLayout implements View {
 		});
 		return subjectsearchfield;
 	}
-	private Component createNewDefinicioButton() {
+	protected Component createNewDefinicioButton() {
 		Button newDefinicioButton = new Button("add a new definition");
 		
 		newDefinicioButton.addClickListener(new ClickListener() {
@@ -144,34 +140,9 @@ public class DefinicioView extends VerticalLayout implements View {
 		return newDefinicioButton;
 	}
 	
-	private Component deleteDefinicioButton() {
-		Button deleteDefinicioButton = new Button("delet of the selected definitions");
-
-		deleteDefinicioButton.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				try {
-					for (Object itemId : selectedItemIds) {
-						BeanItem<Definicio> definicioItem = (BeanItem<Definicio>) definicioTable.getItem(itemId);
-						BeanFieldGroup<Definicio> definicioFieldGroup = new BeanFieldGroup<Definicio>(Definicio.class);
-						definicioFieldGroup.setItemDataSource(definicioItem);
-						definicioFieldGroup.commit();
-						Definicio bean = definicioFieldGroup.getItemDataSource().getBean();
-						definicionService.deleteDefinicio(bean);
-					}
-					refreshTable();
-					selectedItemIds.removeAll(selectedItemIds);
-					Notification.show("Success at deliting");
-				} catch (Exception e) {
-					Notification.show("Error at deleting ");
-				}
-			}
-		});
-		return deleteDefinicioButton;
-	}
 	
-	private Component backToMainViewButton() {
+	
+	protected Component backToMainViewButton() {
 		Button backButton = new Button("Back to main page");
 
 		backButton.addClickListener(new ClickListener() {
@@ -184,7 +155,7 @@ public class DefinicioView extends VerticalLayout implements View {
 		return backButton;
 	}
 	
-	private Component logOutButton() {
+	protected Component logOutButton() {
 		Button logOutButoon = new Button("Exit");
 
 		logOutButoon.addClickListener(new ClickListener() {
@@ -204,7 +175,7 @@ public class DefinicioView extends VerticalLayout implements View {
 		definicioBean.addAll(definicionService.listDefinicios());
 	}
 
-	private Component createTable() {
+	protected Component createTable() {
 		definicioBean = new BeanContainer<Long, Definicio>(Definicio.class);
 		definicioBean.setBeanIdProperty("id");
 		definicioBean.addAll(definicionService.listDefinicios());
@@ -270,11 +241,11 @@ public class DefinicioView extends VerticalLayout implements View {
 			}
 		});
 		
-		definicioTable.setVisibleColumns("selector", "id", "definition", "subject", "registrydate", "viewDefinicio", "editDefinicio");
+		definicioTable.setVisibleColumns("id", "definition", "subject", "registrydate", "viewDefinicio", "editDefinicio");
 
-		definicioTable.setColumnHeader("selector", "selector!");
+		
 		definicioTable.setColumnHeader("id", "id");
-		definicioTable.setColumnHeader("definition", "Cím");
+		definicioTable.setColumnHeader("definition", "definition");
 		definicioTable.setColumnHeader("subject", "subject");
 		definicioTable.setColumnHeader("registrydate", "registrydate");
 		definicioTable.setColumnHeader("viewDefinicio", "Show");

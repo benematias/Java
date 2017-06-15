@@ -15,13 +15,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	private static final String[] FREE_PAGES_ANT = { "/VAADIN/**", "/vaadinServlet/**", LOGIN_PAGE };
 	private static final String DEFAULT_PAGE_URL = "/definicioUI";
 	private static final String SECURITY_URL = "/j_spring_security_check";
-	
-	
+	private static final String ROLE_USER="USER";
+	private static final String ROLE_ADMIN="ADMIN";
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests().antMatchers(FREE_PAGES_ANT).permitAll()
-		.anyRequest().hasAnyRole("USER").
-		and().formLogin().loginPage(LOGIN_PAGE)
+		.antMatchers("/definicioUI#!definicion").hasAnyRole(ROLE_USER)
+		.antMatchers("/definicioUI#**").hasAnyRole(ROLE_ADMIN)
+		.anyRequest().hasAnyRole(ROLE_USER)
+		.and().formLogin().loginPage(LOGIN_PAGE)
 		.loginProcessingUrl(SECURITY_URL)
 		.defaultSuccessUrl(DEFAULT_PAGE_URL, true)
 		.permitAll();
@@ -31,7 +34,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		  auth.inMemoryAuthentication().withUser("123").password("12345678").roles("USER");
+		  auth.inMemoryAuthentication().withUser("123").password("12345678").roles(ROLE_USER);
+		  auth.inMemoryAuthentication().withUser("admin").password("admin").roles(ROLE_USER, ROLE_ADMIN);
+		  
 	}
 	
 }   
